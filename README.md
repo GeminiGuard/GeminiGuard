@@ -29,12 +29,12 @@ Use ``scripts/attack_existing.py`` to generate the adversarial examples on unpro
 
 ``python scripts/attack_existing.py -c svhn_res.json -a``
 
-To change the attack methods, please modify the 'adversarial_type' item in json files. We support five attacks, and please use 'pgd', 'fgsm', 'CW', 'jsma', and 'deepfool' to set the item.
+To change the attack methods, please modify the 'adversarial_type' item in json files. We support five attacks, and please use 'pgd', 'fgsm', 'CW', 'jsma', and 'deepfool' to set the item. The generated adversarial examples are save in 'adversarial' directory, which can be changed by modifying the 'adversarial_dir' item in json files.
 
 ### Generate the Adversarial Examples on Enhanced Model.
 Use ``scripts/attack_new.py`` to generate the adversarial examples on enhanced.
 
-``python scripts/attack_existing.py -c svhn_concat_res.json -a``
+``python scripts/attack_new.py -c svhn_concat_res.json -a -b``
 
 The json files that contain "concat" means they are used for experiments of defending againist adversarial example generation.
 
@@ -52,3 +52,27 @@ The attack method can also be set by modifying 'adversarial_type' item in json f
 ## Detailed Usage.
 We provide the detail scripts to train the classifier and regulator.
 
+#### Train Classifier
+The classifier can be trained with ``scripts/train_classifier.py``
+
+``python scripts/train_classifier.py -c svhn_res.json``
+
+The weights will be saved in ``model/cifar`` directory.
+To use that newly trained classifier, we need to set the 'model_path' item in json files as its save path.
+
+#### Train Regulator
+The regulator needs the adaptive noising training, to train it, we need to use the ``scripts/calculate_distance_distribution.py`` and ``scripts/train_regulator.py``
+
+We first collect the $\mu$ and $\sigma$ for confusion layers. To run following scripts, a classiferi is needed, and the 'model_path' item should be set with the path of that classifier.
+
+``python scripts/calculate_distance_distribution.py -c svhn_sta.json -a all``
+
+The json files with 'sta' suffix are the config used to collect $\mu$ and $\sigma$.
+The collected data are saved in ``json/svhn(cifar)_statistic.json``.
+
+Except the collected data, the middle weights is also dumped to the 'model' directory.
+Before training the regulator, we need set the 'noise_autoencoder_weights' item of json file.
+
+Then, we could train the regulator with collected data to initialize the confusion layers. Ensure that the 'noise_autoencoder_weights' is set in 'svhn_res.json'
+
+``python scripts/train_regulator.py -c svhn_res.json 
