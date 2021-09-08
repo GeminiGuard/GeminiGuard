@@ -62,7 +62,7 @@ if __name__ == '__main__':
                         help='configure file.', default='../json/face.json')
     parser.add_argument('--thres', '-t', type=float, default=0.0,
                         help='give the FP rate and calcute TP rate')
-    parser.add_argument('--draw', '-d', action='store_false',
+    parser.add_argument('--draw', '-d', action='store_true',
                         help='choose to not draw the auc figure.')
    
     parser.add_argument('--cross_test', '-ct', type=str, default='')

@@ -21,8 +21,8 @@ class Inspector():
         self.FP_rate = None
         self.data_clean, self.data_adv = data_clean, data_adv
         self.detector_type = detector_type
-        self.pred_adv = self.classifier.predict(data_adv.x_test, data_adv.y_test, 
-                                    type_str='adversarial result', defence=AE)
+        self.pred_adv = self.classifier.predict(data_adv.x_test, 
+                                    type_str='', defence=AE)
         self.attack_success_index = np.where(self.pred_adv!=data_adv.y_test)[0]
        
         if detector_type is "linear":
@@ -33,8 +33,8 @@ class Inspector():
             num_class = param.get_conf('classes_num')
             self.linear = []
         
-            preds = classifier.predict(data_adv.x_train, data_adv.y_train, 
-                            defence=use_detector, type_str='adversarial train')
+            preds = classifier.predict(data_adv.x_train, 
+                            defence=use_detector, type_str='')
            
             time_col = 0
             time_train = 0

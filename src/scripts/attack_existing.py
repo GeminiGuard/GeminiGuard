@@ -31,10 +31,6 @@ def main(param, args):
         'please give a trained regulator on \'autoencoder_path\' item of config file'
     AE = Autoencoder_abstract.load_model(param.get_conf('autoencoder_path'))
     # AE.autoencoder.summary()
-    
-
-
-
     if args.attack:
         if 'deepfool' in param.get_conf('adversarial_type'):
             deepfool = Deepfool(model, param,data_max=1.0,data_min=0)
