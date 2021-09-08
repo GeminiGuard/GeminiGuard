@@ -18,7 +18,7 @@ We provide the weights of model.
 You can follow the following steps to generate the adversarial examples and detect them.
 
 ### Download the Models Weights.
-Download model weights from ???, and unzip them to the "model" directory.
+First download model [weights](https://github.com/GeminiGuard/GeminiGuard/releases/download/0.1/model.zip) and unzip them to the "model" directory.
 
 ### Get into the 'src' Directory.
 
