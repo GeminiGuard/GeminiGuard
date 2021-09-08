@@ -1,6 +1,8 @@
 # GeminiGuard: Cooperative Defense against Adversarial Attacks
 
-This is repository for paper GeminiGuard: Cooperative Defense against Adversarial Attacks
+This is repository for paper GeminiGuard: Cooperative Defense against Adversarial Attacks.
+
+If you have any problem during using GeminiGuard, please open an issue to help us improve it.
 
 ## Requirements
 we mainly require the Python=3.6, keras=2.1.3, tensorflow-gpu=1.12.0, numpy, pandas, scikit-learn,cv2.
